@@ -1,9 +1,14 @@
 from django.shortcuts import render
-from .models import *
+from .models import Movie
 
 # Create your views here.
 
 def home(request):
-    data = Actor.objects.all()
-    context = {'actors': data}
+    movies = Movie.objects.all()
+    context = {'movies': movies}
     return render(request, 'moviesite/home.html', context)
+
+def movie_info(reqeust, id):
+    movie = Movie.objects.get(pk=id)
+    context = {'movie': movie}
+    return render(request, 'movieste/movie_info.html', context)
