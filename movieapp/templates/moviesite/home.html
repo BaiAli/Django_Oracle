@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        {% block content %} {% endblock %}
+    </header>
+    <main>
+        {% for movie in movies %}
+        <a href="#">
+            <div class="movie">
+                <img src="{{ movie.m_poster_path }}" alt="Oops..">
+                <div class="movie-info">     
+                        <h2>
+                            {{ movie.m_title }}
+                        </h2>
+                        <span>{{movie.m_rating}}</span>
+                </div>
+            </div>
+
+        </a>
+        {% endfor  %}
+    </main>
+</body>
+</html>
+
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    :root {
+        --primary-color:#22254b;
+        --secondary-color:#373b69;
+    }
+    body{
+        background-color: var(--primary-color);
+        font-family: 'Poppins', 'sans-serif';
+        margin: 0;
+    }
+    header{
+        padding:1rem;
+        display:flex;
+        justify-content: flex-end;
+        background-color: var(--secondary-color);
+    }
+    main{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .movie{
+        width:300px;
+        margin: 1rem;
+        border-radius: 3px;
+        box-shadow: 0.2px  4px 5px rgba(0,0,0,0.1);
+        background-color: var(--secondary-color);
+        position: relative;
+        overflow: hidden;
+    }
+    .movie img{
+        width: 100%;
+    }
+    .movie-info{
+        color:#eee;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 1rem 1rem;
+        letter-spacing: 0.5px;
+    }
+    .movie_info span{
+        background-color: var(--primary-color);
+        padding: 0.25rem 0.5rem;
+        border-radius: 3px;
+        font-weight: bold;
+    }
+</style>
