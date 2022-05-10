@@ -1,15 +1,15 @@
 from django.db import models
 
 class Actor(models.Model):
-    a_id = models.BigIntegerField(blank=True, null=True)
-    a_name = models.CharField(max_length=200, blank=True, null=True)       
-    a_surname = models.CharField(max_length=200, blank=True, null=True)    
-    a_size = models.BigIntegerField(blank=True, null=True)
-    a_home_town = models.CharField(max_length=200, blank=True, null=True)  
-    a_generes = models.CharField(max_length=200, blank=True, null=True)    
+    a_id = models.BigIntegerField(primary_key=True)
+    a_name = models.CharField(max_length=200, blank=True, null=True)
+    a_surname = models.CharField(max_length=200, blank=True, null=True)
+    a_size = models.BigIntegerField()
+    a_home_town = models.CharField(max_length=200, blank=True, null=True)
+    a_generes = models.CharField(max_length=200, blank=True, null=True)
     a_movie_count = models.CharField(max_length=200, blank=True, null=True)
     a_age = models.BigIntegerField(blank=True, null=True)
-    a_photo_path = models.CharField(max_length=200, blank=True, null=True) 
+    a_photo_path = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -17,16 +17,18 @@ class Actor(models.Model):
 
 
 class Actormovie(models.Model):
-    am = models.BigIntegerField(blank=True, null=True)  
-    a_id = models.BigIntegerField(blank=True, null=True)
-    m_id = models.BigIntegerField(blank=True, null=True)
+    am = models.BigIntegerField(primary_key=True)
+    a = models.ForeignKey(Actor, models.DO_NOTHING)
+    m = models.ForeignKey('Movie', models.DO_NOTHING)
 
     class Meta:
         managed = False
         db_table = 'actormovie'
 
+
+
 class Director(models.Model):
-    d_id = models.BigIntegerField(blank=True, null=True)
+    d_id = models.BigIntegerField(primary_key=True)
     d_name = models.CharField(max_length=200, blank=True, null=True)
     d_surname = models.CharField(max_length=200, blank=True, null=True)
     d_age = models.BigIntegerField(blank=True, null=True)
@@ -34,26 +36,27 @@ class Director(models.Model):
     d_home_town = models.CharField(max_length=200, blank=True, null=True)
     d_generes = models.CharField(max_length=200, blank=True, null=True)
     d_movie_count = models.CharField(max_length=200, blank=True, null=True)
-    d_size = models.FloatField(blank=True, null=True)
+    d_size = models.BigIntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'director'
 
 
-
-
 class Directormovie(models.Model):
-    pr = models.BigIntegerField(blank=True, null=True)
-    d_id = models.BigIntegerField(blank=True, null=True)
-    m_id = models.BigIntegerField(blank=True, null=True)
+    pr = models.BigIntegerField(primary_key=True)
+    d = models.ForeignKey(Director, models.DO_NOTHING)
+    m = models.ForeignKey('Movie', models.DO_NOTHING)
 
     class Meta:
         managed = False
         db_table = 'directormovie'
 
+
+
+
 class Generes(models.Model):
-    g_id = models.BigIntegerField(blank=True, null=True)
+    g_id = models.BigIntegerField(primary_key=True)
     g_name = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
@@ -62,9 +65,9 @@ class Generes(models.Model):
 
 
 class Generesmovie(models.Model):
-    gm = models.BigIntegerField(blank=True, null=True)
-    g_id = models.BigIntegerField(blank=True, null=True)
-    m_id = models.BigIntegerField(blank=True, null=True)
+    gm = models.BigIntegerField(primary_key=True)
+    g = models.ForeignKey(Generes, models.DO_NOTHING)
+    m = models.ForeignKey('Movie', models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -72,7 +75,7 @@ class Generesmovie(models.Model):
 
 
 class Movie(models.Model):
-    m_id = models.BigIntegerField(blank=True, null=True)
+    m_id = models.BigIntegerField(primary_key=True)
     m_country = models.CharField(max_length=200, blank=True, null=True)
     m_word = models.CharField(max_length=200, blank=True, null=True)
     m_time = models.CharField(max_length=200, blank=True, null=True)
@@ -92,11 +95,11 @@ class Movie(models.Model):
 
 
 class Person(models.Model):
-    p_id = models.BigIntegerField(blank=True, null=True)
+    p_id = models.BigIntegerField(primary_key=True)
     p_nickname = models.CharField(max_length=50, blank=True, null=True)
     p_name = models.CharField(max_length=50, blank=True, null=True)
     p_surname = models.CharField(max_length=50, blank=True, null=True)
-    p_age = models.IntegerField(blank=True, null=True)
+    p_age = models.BigIntegerField(blank=True, null=True)
     p_email = models.CharField(max_length=50, blank=True, null=True)
     p_password = models.CharField(max_length=50, blank=True, null=True)
 
@@ -106,9 +109,9 @@ class Person(models.Model):
 
 
 class Personroles(models.Model):
-    pr = models.BigIntegerField(blank=True, null=True)
-    r_id = models.BigIntegerField(blank=True, null=True)
-    p_id = models.BigIntegerField(blank=True, null=True)
+    pr = models.BigIntegerField(primary_key=True)
+    r = models.ForeignKey('Roles', models.DO_NOTHING)
+    p = models.ForeignKey(Person, models.DO_NOTHING)
 
     class Meta:
         managed = False
@@ -116,10 +119,10 @@ class Personroles(models.Model):
 
 
 class Roles(models.Model):
-    r_id = models.BigIntegerField(blank=True, null=True)
+    r_id = models.BigIntegerField(primary_key=True)
     r_name = models.CharField(max_length=200, blank=True, null=True)
     r_description = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'roles'      
+        db_table = 'roles'
