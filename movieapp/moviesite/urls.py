@@ -15,7 +15,7 @@ from . import views
 app_name = 'moviesite'
 urlpatterns = [
     path('', views.home),
-    path('movie_info/<int:int>', views.movie_info, name='movie_info'),
+    path('infoM/<int:pk>/', views.infoM, name='infoM'),
     path('search', views.search , name='search')
 ]
 

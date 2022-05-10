@@ -89,9 +89,13 @@ class Movie(models.Model):
     m_budget = models.CharField(max_length=200, blank=True, null=True)
     m_desc = models.CharField(max_length=1500, blank=True, null=True)
 
+    def __str__(self):
+        return self.m_title
+
     class Meta:
         managed = False
         db_table = 'movie'
+
 
 
 class Person(models.Model):
