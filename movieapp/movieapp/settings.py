@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'XEPDB1',
-        'USER': 'hr',
-        'PASSWORD': 'hr',
+        'USER': 'djangodb',
+        'PASSWORD': '12345',
     }
 }
 # 

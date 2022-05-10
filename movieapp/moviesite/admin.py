@@ -8,6 +8,8 @@ admin.site.register(Directormovie)
 admin.site.register(Person)
 admin.site.register(Personroles)
 admin.site.register(Roles)
+admin.site.register(Generes)
+admin.site.register(Generesmovie)
 
 
 # Register your models here.
